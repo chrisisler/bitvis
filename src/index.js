@@ -1,57 +1,32 @@
-// Docs: https://www.highcharts.com/docs/chart-and-series-types/chart-types
-// Todo: convert from bitocin price idnex to real dollars?
+import { h, render } from 'preact'
+import { Router } from 'preact-router'
+import './normalize.css'
+import Header from './Header'
 
-import { h, render, Component } from 'preact'
-import Highcharts from 'highcharts'
+const WithHeader = ({ View }) => (
+    <div>
+        <Header />
+        <View style={{ marginTop: 60 }} />
+    </div>
+)
 
-const renderChart = (coins) => {
-    const coinNames = coins.map((c) => c.name)
-    const coinPrices = coins.map((c) => c.data[0])
-    console.log('coinPrices is:', coinPrices);
+const DashboardView = (props) => <h1 {...props}>DashboardView</h1>
 
-    Highcharts.chart('container', {
-        chart: { type: 'column' },
-        title: { text: 'Various CryptoCoins' },
-        xAxis: { categories: coinNames },
-        yAxis: { title: { text: 'Bitcoin Price Index (1 = $2,575)' } },
-        // series: coins
-        series: [{
-            name: 'foo',
-            data: coinPrices
-        }]
-    })
+const FakeView = (props) => <h1 {...props}>FakeView</h1>
+
+const css = {
+    fontFamily: 'sans-serif',
+    fontSize: 16,
+    letterSpacing: 0.6
 }
 
-// const renderChartFixed = () => {
-//     Highcharts.chart('container', {
-//         chart: { type: 'column' },
-//         title: { text: 'bitcoin various prices' },
-//         yAxis: { title: { text: 'price_btc' } },
-//         //mock data
-//         series: [{
-//             name: 'bitcoin',
-//             data: [ 3.02 ]
-//         }]
-//     })
-// }
+const App = () => (
+    <div style={css}>
+        <Router>
+            <WithHeader path='/' default View={DashboardView} />
+            <WithHeader path='/fakeview' View={FakeView} />
+        </Router>
+    </div>
+)
 
-class Div extends Component
-{
-    componentDidMount() {
-        fetch('http://api.cryptocoincharts.info/listCoins')
-        .then(res => res.json())
-        .then((data) => {
-            const coins = data
-                .slice(1, 11)
-                .map(({ name, price_btc }) => ({ name, data: [ price_btc ] }))
-            renderChart(coins)
-        })
-        .catch(e => {
-            console.error(e);
-        })
-    }
-
-    render = () => <div id='container' style={{ height: '80vh' }}/>
-}
-
-render(<Div />, document.body)
+render(<App />, document.body)

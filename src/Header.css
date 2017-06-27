@@ -1,0 +1,34 @@
+.wrapper {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    height: 60px;
+    padding: 0;
+    background-color: #005b96;
+}
+
+.links {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.listItem {
+    height: 100%;
+    list-style-type: none;
+}
+
+.link {
+    color: white;
+    margin: 0 .6rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    text-decoration: none;
+} .link:hover {
+    font-style: bold;
+}
