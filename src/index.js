@@ -2,31 +2,38 @@ import { h, render } from 'preact'
 import { Router } from 'preact-router'
 import './normalize.css'
 import Header from './Header'
+import DashboardView from './DashboardView'
+import { css } from 'glamor'
 
+
+const WithHeaderCSS = css({
+    marginTop: 60
+    , height: 'calc(100vh - 60px)'
+})
 const WithHeader = ({ View }) => (
     <div>
         <Header />
-        <View style={{ marginTop: 60 }} />
+        <View {...WithHeaderCSS} />
     </div>
 )
 
-const DashboardView = (props) => <h1 {...props}>DashboardView</h1>
 
-const FakeView = (props) => <h1 {...props}>FakeView</h1>
-
-const css = {
-    fontFamily: 'sans-serif',
-    fontSize: 16,
-    letterSpacing: 0.6
-}
-
+const AppCSS = css({
+    fontFamily: 'sans-serif'
+    , fontSize: 18
+    , letterSpacing: 0.8
+    , height: '100%'
+    , width: '100%'
+    , backgroundColor: '#eee'
+})
 const App = () => (
-    <div style={css}>
+    <div {...AppCSS}>
         <Router>
             <WithHeader path='/' default View={DashboardView} />
-            <WithHeader path='/fakeview' View={FakeView} />
+            <WithHeader path='/fakeview' View={(props) => <h1 {...props}>FakeView</h1>} />
         </Router>
     </div>
 )
+
 
 render(<App />, document.body)
