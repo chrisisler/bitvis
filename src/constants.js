@@ -1,7 +1,6 @@
 export const VIEWS = [
    'dashboard'
     , 'fakeview'
-    , 'exchange-rates'
 ]
 
 export const colors = {

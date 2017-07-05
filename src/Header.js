@@ -15,6 +15,7 @@ const style = {
         , top: 0
         , height: 60
         , padding: 0
+        , paddingLeft: '1%'
         , backgroundColor: colors.globalBlue
     })
     , links: css(fullHeight, {
@@ -36,6 +37,8 @@ const style = {
         , flexDirection: 'column'
         , justifyContent: 'center'
         , textDecoration: 'none'
+        , fontWeight: '200'
+        , fontSize: 14
     })
 }
 
@@ -43,7 +46,7 @@ const style = {
 const ViewLink = (viewName) => (
     <li {...style.listItem}>
         <Link href={`/${viewName}`} {...style.link}>
-            {viewName.replace(/-/, ' ')}
+            {viewName.toUpperCase()}
         </Link>
     </li>
 )

@@ -4,7 +4,6 @@ import { css } from 'glamor'
 import './normalize.css'
 import Header from './Header'
 import DashboardView from './DashboardView'
-import ExchangeRatesView from './ExchangeRatesView'
 
 const WithHeaderCSS = css({
     marginTop: 60
@@ -33,7 +32,6 @@ const App = () => (
         <Router>
             <WithHeader path='/' default View={DashboardView} />
             <WithHeader path='/fakeview' View={(props) => <h1 {...props}>FakeView</h1>} />
-            <WithHeader path='/exchange-rates' View={ExchangeRatesView} />
         </Router>
     </div>
 )
