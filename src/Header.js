@@ -2,6 +2,7 @@ import { h } from 'preact'
 import { Link } from 'preact-router'
 import { VIEWS } from './constants'
 import { css } from 'glamor'
+import { colors } from './constants'
 
 // Reusable css rules should be extracted into separate `css` calls.
 // Todo: reduce amount of css used.
@@ -14,21 +15,20 @@ const style = {
         , top: 0
         , height: 60
         , padding: 0
-        , backgroundColor: '#005b96'
+        , backgroundColor: colors.globalBlue
     })
-    , links: css({
+    , links: css(fullHeight, {
         display: 'flex'
         , alignItems: 'center'
         , margin: '0 auto'
-        , padding: 0
         , overflow: 'hidden'
-    }, fullHeight)
-
-    , listItem: css({
+        , maxWidth: 1800
+        , padding: 0
+    })
+    , listItem: css(fullHeight, {
         listStyleType: 'none'
-    }, fullHeight)
-
-    , link: css({
+    })
+    , link: css(fullHeight, {
         color: 'white'
         , margin: '0 .6rem'
         , position: 'relative'
@@ -36,14 +36,14 @@ const style = {
         , flexDirection: 'column'
         , justifyContent: 'center'
         , textDecoration: 'none'
-    }, fullHeight)
+    })
 }
 
-// Not a Preact component, just a string to jsx function.
+// Not a component, just maps a string to jsx.
 const ViewLink = (viewName) => (
     <li {...style.listItem}>
         <Link href={`/${viewName}`} {...style.link}>
-            {viewName}
+            {viewName.replace(/-/, ' ')}
         </Link>
     </li>
 )
@@ -51,7 +51,7 @@ const ViewLink = (viewName) => (
 export default (props) => (
     <nav {...style.wrapper}>
         <ul {...style.links} {...props}>
-            {Object.values(VIEWS).map(ViewLink)}
+            {VIEWS.map(ViewLink)}
         </ul>
     </nav>
 )

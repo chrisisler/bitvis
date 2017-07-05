@@ -14,63 +14,25 @@
 
 import { h } from 'preact'
 import { css } from 'glamor'
-
-// TODO: Export this color to ./constants.js
-const lightBlueColor = '#0089e3' // pretty good
-
-const InsightCSS = {
-    container: css({
-        minHeight: 260
-        , height: 'fit-content'
-        , width: 360
-        , boxShadow: '0 2px 2px rgba(0, 0, 0, 0.2)'
-        , borderRadius: 3
-        , backgroundColor: 'white'
-        , margin: 12
-    , })
-    , title: css({
-        color: '#005b96'
-        , fontSize: 18
-        , textAlign: 'center'
-        , margin: 16
-    , })
-    , text: css({
-        fontSize: 68
-        , fontWeight: 'lighter'
-        , color: lightBlueColor
-        , textAlign: 'center'
-        , paddingTop: -12
-    })
-}
-const Insight = ({ type, title, subtitle, ...props }) => (
-    <div {...InsightCSS.container}>
-        <p {...InsightCSS.title}>{title}</p>
-        {
-            type === 'text'
-                ? ( <p {...InsightCSS.text}>{props.text}</p> )
-                : null // todo: make charts work here (highcharts)
-        }
-    </div>
-)
-
+import Insight from './Insight'
+import * as api from './api'
 
 const DashboardViewCSS = css({
     display: 'flex'
     , flexDirection: 'row'
     , flexWrap: 'wrap'
     , justifyContent: 'center'
+    // , justifyContent: 'flex-start'
+    , alignContent: 'flex-start'
     , maxWidth: 1600
     , margin: '0 auto'
+    , paddingTop: 24
 })
+
 export default (props) => (
     <div {...props} {...DashboardViewCSS}>
-        <Insight type='text' title='Price' text='2595' subtitle='US Dollars' />
-        <Insight type='text' title='Transactions' text='277892' subtitle='' />
-
-        <Insight type='text' title='Price' text='2595' subtitle='US Dollars' />
-        <Insight type='text' title='Transactions' text='277892' subtitle='' />
-
-        <Insight type='text' title='Price' text='2595' subtitle='US Dollars' />
-        <Insight type='text' title='Transactions' text='277892' subtitle='' />
+        <Insight.Text getData={api.getBitcoinPrice}  title='Price' subtitle='24 hour weighted price (in USD) from the largest exchanges' />
+        <Insight.Text getData={api.getTxPerDay}  title='Transactions' subtitle='Aggregate number of confirmed Bitcoin transactions (past 24 hours)' />
+        <Insight.Chart getData={()=>{}} title='Chart Title' subtitle='Chart Subtitle' />
     </div>
 )

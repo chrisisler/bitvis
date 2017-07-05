@@ -11,7 +11,7 @@ Development powered by [Babel](babeljs.io), [Webpack](webpack.github.io), [Yarn]
 2. `yarn ; yarn start`
 
 ### Todo
-- Put fake data into Dashboard Insight components.
+- Put "Tools" section of blockchain.info/q into a separate view.
 
 #### What I Learned
 

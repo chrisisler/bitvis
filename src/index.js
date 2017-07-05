@@ -1,22 +1,23 @@
 import { h, render } from 'preact'
 import { Router } from 'preact-router'
+import { css } from 'glamor'
 import './normalize.css'
 import Header from './Header'
 import DashboardView from './DashboardView'
-import { css } from 'glamor'
-
+import ExchangeRatesView from './ExchangeRatesView'
 
 const WithHeaderCSS = css({
     marginTop: 60
     , height: 'calc(100vh - 60px)'
+    , padding: 32
 })
+
 const WithHeader = ({ View }) => (
     <div>
         <Header />
         <View {...WithHeaderCSS} />
     </div>
 )
-
 
 const AppCSS = css({
     fontFamily: 'sans-serif'
@@ -26,14 +27,15 @@ const AppCSS = css({
     , width: '100%'
     , backgroundColor: '#eee'
 })
+
 const App = () => (
     <div {...AppCSS}>
         <Router>
             <WithHeader path='/' default View={DashboardView} />
             <WithHeader path='/fakeview' View={(props) => <h1 {...props}>FakeView</h1>} />
+            <WithHeader path='/exchange-rates' View={ExchangeRatesView} />
         </Router>
     </div>
 )
-
 
 render(<App />, document.body)
