@@ -26,13 +26,12 @@ const DashboardViewCSS = css({
     , alignContent: 'flex-start'
     , maxWidth: 1600
     , margin: '0 auto'
-    , paddingTop: 24
 })
 
+    // <Insight.Text getData={api.getBitcoinPrice}  title='Price' subtitle='24 hour weighted price (in USD) from the largest exchanges' />
+    //     <Insight.Text getData={api.getTxPerDay}  title='Transactions' subtitle='Aggregate number of confirmed Bitcoin transactions (past 24 hours)' />
 export default (props) => (
     <div {...props} {...DashboardViewCSS}>
-        <Insight.Text getData={api.getBitcoinPrice}  title='Price' subtitle='24 hour weighted price (in USD) from the largest exchanges' />
-        <Insight.Text getData={api.getTxPerDay}  title='Transactions' subtitle='Aggregate number of confirmed Bitcoin transactions (past 24 hours)' />
-        <Insight.Chart getData={()=>{}} title='Chart Title' subtitle='Chart Subtitle' />
+        <Insight.Chart getData={api.getChart} title='Chart Title' subtitle='Chart Subtitle' />
     </div>
 )

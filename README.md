@@ -12,6 +12,7 @@ Development powered by [Babel](babeljs.io), [Webpack](webpack.github.io), [Yarn]
 
 ### Todo
 - Put "Tools" section of blockchain.info/q into a separate view.
+- make charts work
 
 #### What I Learned
 

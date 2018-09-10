@@ -6,6 +6,7 @@
     "preact-scripts": "0.3.0-alpha"
   },
   "dependencies": {
+    "blockchain.info": "^2.8.0",
     "glamor": "^2.20.25",
     "highcharts": "^5.0.12",
     "node-fetch": "^1.7.1",

@@ -4,12 +4,9 @@ import { css } from 'glamor'
 import './normalize.css'
 import Header from './Header'
 import DashboardView from './DashboardView'
+import ToolsView from './ToolsView'
 
-const WithHeaderCSS = css({
-    marginTop: 60
-    , height: 'calc(100vh - 60px)'
-    , padding: 32
-})
+const WithHeaderCSS = css({ marginTop: 60, height: 'calc(100vh - 60px)' })
 
 const WithHeader = ({ View }) => (
     <div>
@@ -31,7 +28,7 @@ const App = () => (
     <div {...AppCSS}>
         <Router>
             <WithHeader path='/' default View={DashboardView} />
-            <WithHeader path='/fakeview' View={(props) => <h1 {...props}>FakeView</h1>} />
+            <WithHeader path='/tools' View={ToolsView} />
         </Router>
     </div>
 )

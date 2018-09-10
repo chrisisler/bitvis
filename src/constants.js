@@ -1,6 +1,6 @@
 export const VIEWS = [
    'dashboard'
-    , 'fakeview'
+    , 'tools'
 ]
 
 export const colors = {

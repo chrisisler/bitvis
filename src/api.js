@@ -1,35 +1,38 @@
+/** Wrapper functions for retreiving data from https://blockchain.info. */
+
 /**
- * Wrapper functions for retreiving data from https://blockchain.info.
+ * @private
+ * @param {String} query
+ * @returns {Promise}
  */
-
-const baseUrl = 'https://blockchain.info/'
-const corsTrue = '?cors=true'
-
 function get(query) {
-    return fetch(baseUrl + query + corsTrue)
-        .then((response) => response.json())
-        .catch((err) => console.error(err))
+    if (query.includes('?')) {
+        query += '&cors=true'
+    } else {
+        query += '?cors=true'
+    }
+
+    // return fetch(query).then((response) => {
+    //     console.log('response.json() is:', response.json())
+    //     response.json()
+    // })
+    return fetch(query)
 }
 
-/**
- * @returns {Promise.then(Number)}
- */
 export function getBitcoinPrice() {
-    return  get('q/24hrprice')
+    return get('https://blockchain.info/q/24hrprice')
 }
 
-/**
- * @returns {Promise.then(Number)}
- */
 export function getTxPerDay() {
-    return get('q/24hrtransactioncount')
+    return get('https://blockchain.info/q/24hrtransactioncount')
 }
 
-/**
- * Returns a promise that when fulfilled applies a function to an array of objects.
- * @see https://blockchain.info/api/exchange_rates_api
- * @returns {Promise.then(Array[Object])}
- */
-export function getExchangeRates() {
-    return get('ticker')
+// todo
+export function getChart() {
+    const options = `?timespan=2years&sampled=true`
+    return get(`https://api.blockchain.info/charts/transactions-per-second${options}`)
+}
+
+export function btcAddressToHash(address) {
+    return get(`https://blockchain.info/q/addresstohash/${address}`)
 }
